@@ -96,7 +96,7 @@ Broadband.prototype = {
         maxValue: 9999,
         minStep: 0.01
       })
-      .updateValue(this.dlspeed);
+      .updateValue(this.ulspeed);
 
     this.Sensor.addCharacteristic(Characteristic.DownloadSpeed);
     this.Sensor.getCharacteristic(Characteristic.DownloadSpeed)
@@ -140,7 +140,7 @@ Broadband.prototype = {
         self.log('Upload: ' + self.ulspeed + ' Mbps');
         self.log('Ping: ' + self.ping + ' ms');
 
-        self.Sensor.getCharacteristic(Characteristic.CurrentTemperature).updateValue(self.dlspeed);
+        self.Sensor.getCharacteristic(Characteristic.CurrentTemperature).updateValue(self.ulspeed);
         self.Sensor.getCharacteristic(Characteristic.DownloadSpeed).updateValue(self.dlspeed);
         self.Sensor.getCharacteristic(Characteristic.UploadSpeed).updateValue(self.ulspeed);
         self.Sensor.getCharacteristic(Characteristic.Ping).updateValue(self.ping);
@@ -153,7 +153,7 @@ Broadband.prototype = {
         self.dlspeed = self.dlspeed;
         self.ulspeed = self.ulspeed;
         self.ping = self.ping;
-        self.Sensor.getCharacteristic(Characteristic.CurrentTemperature).updateValue(self.dlspeed);
+        self.Sensor.getCharacteristic(Characteristic.CurrentTemperature).updateValue(self.ulspeed);
         self.Sensor.getCharacteristic(Characteristic.DownloadSpeed).updateValue(self.dlspeed);
         self.Sensor.getCharacteristic(Characteristic.UploadSpeed).updateValue(self.ulspeed);
         self.Sensor.getCharacteristic(Characteristic.Ping).updateValue(self.ping);
@@ -170,7 +170,7 @@ Broadband.prototype = {
     if (self.dlspeed != 0 && self.ulspeed != 0 && self.ping != 0) {
       self.historyService.addEntry({
         time: moment().unix(),
-        temp: self.dlspeed,
+        temp: self.ulspeed,
         pressure: self.ping,
         humidity: self.ulspeed
       });
